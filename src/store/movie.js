@@ -76,10 +76,10 @@ export default{
                         })
                     }
                 }
-            } catch(message){
+            } catch({ message }){
                 commit('updateState', {
                     movies: [],
-                    message
+                    message 
                 })
             } finally{
                 commit('updateState', {
@@ -116,7 +116,9 @@ export default{
     }
 }
 
-function _fetchMoive(payload){
+async function _fetchMoive(payload){
+    return await axios.post('/.netlify/functions/movie', payload)
+    /* "functions/movie.js 이관하였음."
     const { title, type, year, page, id } = payload
     const OMDB_API_KEY = '7035c60c'
     const url = id 
@@ -135,4 +137,5 @@ function _fetchMoive(payload){
                 reject(err.message)
             })
     })
+    */
 }
